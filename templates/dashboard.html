@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Predictive Maintenance Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="header">
+    <div>
+        <h1>IoT Predictive Maintenance</h1>
+        <p>AI-powered machine health monitoring</p>
+    </div>
+
+    <div class="status-badge" id="systemStatus">
+        SYSTEM READY
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="sensor-grid">
+
+        <div class="card sensor-card">
+            <h3>🌡️ Temperature</h3>
+            <div class="sensor-value">
+                <span id="temperatureValue">--</span>
+                <small>°C</small>
+            </div>
+            <p>Machine temperature</p>
+        </div>
+
+        <div class="card sensor-card">
+            <h3>📳 Vibration</h3>
+            <div class="sensor-value">
+                <span id="vibrationValue">--</span>
+                <small>mm/s</small>
+            </div>
+            <p>Machine vibration</p>
+        </div>
+
+        <div class="card sensor-card">
+            <h3>⚡ Current</h3>
+            <div class="sensor-value">
+                <span id="currentValue">--</span>
+                <small>A</small>
+            </div>
+            <p>Electrical current</p>
+        </div>
+
+    </section>
+
+
+    <section class="prediction-section">
+
+        <div class="card prediction-card">
+
+            <h2>Machine Health Prediction</h2>
+
+            <div id="predictionStatus" class="prediction-status">
+                Waiting for sensor data...
+            </div>
+
+            <div class="probability-container">
+                <p>Failure Probability</p>
+
+                <div class="progress-bar">
+                    <div id="probabilityBar" class="progress"></div>
+                </div>
+
+                <strong id="probabilityText">0%</strong>
+            </div>
+
+        </div>
+
+
+        <div class="card input-card">
+
+            <h2>Test Sensor Reading</h2>
+
+            <div class="input-grid">
+
+                <label>
+                    Temperature (°C)
+                    <input
+                        type="number"
+                        id="temperatureInput"
+                        value="65"
+                        step="0.1"
+                    >
+                </label>
+
+                <label>
+                    Vibration (mm/s)
+                    <input
+                        type="number"
+                        id="vibrationInput"
+                        value="2.5"
+                        step="0.1"
+                    >
+                </label>
+
+                <label>
+                    Current (A)
+                    <input
+                        type="number"
+                        id="currentInput"
+                        value="5"
+                        step="0.1"
+                    >
+                </label>
+
+            </div>
+
+            <button onclick="runPrediction()">
+                Predict Machine Health
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="card chart-card">
+        <h2>Sensor History</h2>
+        <canvas id="sensorChart"></canvas>
+    </section>
+
+
+    <section class="info-grid">
+
+        <div class="card">
+            <h3>🤖 ML Model</h3>
+            <p>Random Forest Classifier</p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Input Sensors</h3>
+            <p>Temperature, Vibration, Current</p>
+        </div>
+
+        <div class="card">
+            <h3>🔮 Prediction</h3>
+            <p>Normal / Failure</p>
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>AI-Powered Predictive Maintenance for IoT Devices</p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
+</body>
+</html>
